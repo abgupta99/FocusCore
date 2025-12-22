@@ -66,8 +66,9 @@ export default function TodoItem({ item, onToggle, onRemove, onFocus }) {
       <TouchableOpacity
         style={styles.titleWrap}
         activeOpacity={0.7}
-        onPress={() => onToggle(item.id)}
+        onPress={!item.completed ? () => onToggle(item.id) : undefined}
         accessibilityLabel={`Toggle ${item.title}`}
+        accessibilityState={{ disabled: !!item.completed }}
       >
         <Text
           style={[
@@ -82,11 +83,13 @@ export default function TodoItem({ item, onToggle, onRemove, onFocus }) {
 
       {/* ▶️ START FOCUS */}
       <TouchableOpacity
-        onPress={() => onFocus(item)}
-        style={styles.startButton}
+        onPress={!item.completed ? () => onFocus(item) : undefined}
+        style={[styles.startButton, item.completed && styles.startButtonDisabled]}
         accessibilityLabel={`Start focus for ${item.title}`}
+        accessibilityState={{ disabled: !!item.completed }}
+        disabled={!!item.completed}
       >
-        <Text style={styles.startText}>Start</Text>
+        <Text style={[styles.startText, item.completed && styles.startTextDisabled]}>Start</Text>
       </TouchableOpacity>
 
       {/* ❌ REMOVE */}
@@ -174,5 +177,11 @@ const styles = StyleSheet.create({
   startText: {
     color: '#020716',
     fontWeight: '800',
+  },
+  startButtonDisabled: {
+    backgroundColor: 'rgba(0,240,255,0.18)',
+  },
+  startTextDisabled: {
+    color: 'rgba(2,7,22,0.45)',
   },
 });

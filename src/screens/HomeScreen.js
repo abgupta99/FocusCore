@@ -77,7 +77,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>DoOne</Text>
+        <Text style={styles.title}>FocusCore</Text>
         <Text style={styles.subtitle}>
           {remaining} TASKS • 🔥 {streak} DAY STREAK
         </Text>
@@ -103,7 +103,7 @@ export default function HomeScreen() {
             accessibilityRole="button"
             accessibilityLabel="Jump to today"
           >
-            <Text style={styles.todayPillText}>Today</Text>
+            <Text style={[styles.todayPillText, selectedDate === today && styles.chevDisabled]}>Today</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -111,7 +111,7 @@ export default function HomeScreen() {
             accessibilityLabel="Next day"
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
-            <Text style={[styles.chev, selectedDate === today && styles.chevDisabled]}>{'›'}</Text>
+            <Text style={styles.chev}>{'›'}</Text>
           </TouchableOpacity>
         </View>
 
@@ -189,8 +189,8 @@ const styles = StyleSheet.create({
   chev: {
     color: '#7A8FB3',
     paddingHorizontal: 8,
-    fontSize: 20,
-    fontWeight: '700',
+    fontSize: 30,
+    fontWeight: '900',
   },
   chevDisabled: {
     opacity: 0.35,
