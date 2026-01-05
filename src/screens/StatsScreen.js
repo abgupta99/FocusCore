@@ -115,10 +115,10 @@ export default function StatsScreen() {
       }
     })();
   }, [mode, days]);
-
+ console.log(days, new Date().toISOString().slice(0,10));
   const recent =
     mode === 'today'
-      ? days.slice(0, 1)
+      ? days.filter(d => d.key === new Date().toISOString().slice(0,10))
       : mode === '7'
       ? days.slice(0, 7)
       : days;
